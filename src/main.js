@@ -13,7 +13,7 @@ const scene = new THREE.Scene();
 
 const locar = new LocAR.LocationBased(scene, camera);
 
-const cam = new LocAR.Webcam( { 
+const cam = new LocAR.Webcam({
     video: { facingMode: 'environment' }
 }, null);
 
@@ -50,42 +50,42 @@ locar.on("gpserror", error => {
 });
 
 locar.on("gpsupdate", ev => {
-    if(firstLocation) {
+    if (firstLocation) {
         alert(`Got the initial location: longitude ${ev.position.coords.longitude}, latitude ${ev.position.coords.latitude}`);
 
         const boxProps = [{
-            latDis: 0.0005,
+            latDis: 0.00005, //5 meter 
             lonDis: 0,
             colour: 0xff0000
         }, {
-            latDis: -0.0005,
+            latDis: -0.00005,
             lonDis: 0,
             colour: 0xffff00
         }, {
             latDis: 0,
-            lonDis: -0.0005,
+            lonDis: -0.00005,
             colour: 0x00ffff
         }, {
             latDis: 0,
-            lonDis: 0.0005,
+            lonDis: 0.00005,
             colour: 0x00ff00
         }];
 
-        const geom = new THREE.BoxGeometry(10,10,10);
+        const geom = new THREE.BoxGeometry(10, 10, 10);
 
-        for(const boxProp of boxProps) {
+        for (const boxProp of boxProps) {
             const mesh = new THREE.Mesh(
-                geom, 
-                new THREE.MeshBasicMaterial({color: boxProp.colour})
+                geom,
+                new THREE.MeshBasicMaterial({ color: boxProp.colour })
             );
 
             locar.add(
-                mesh, 
-                ev.position.coords.longitude + boxProp.lonDis, 
+                mesh,
+                ev.position.coords.longitude + boxProp.lonDis,
                 ev.position.coords.latitude + boxProp.latDis
             );
         }
-        
+
         firstLocation = false;
     }
 });
