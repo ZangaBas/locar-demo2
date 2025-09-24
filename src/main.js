@@ -54,20 +54,20 @@ locar.on("gpsupdate", ev => {
         alert(`Got the initial location: longitude ${ev.position.coords.longitude}, latitude ${ev.position.coords.latitude}`);
 
         const boxProps = [{
-            latDis: 0.0003, //5 meter 
+            latDis: 0.0005, //5 meter 
             lonDis: 0,
             colour: 0xff0000
         }, {
-            latDis: -0.0003,
+            latDis: -0.0005,
             lonDis: 0,
             colour: 0xffff00
         }, {
             latDis: 0,
-            lonDis: -0.0003,
+            lonDis: -0.0005,
             colour: 0x00ffff
         }, {
             latDis: 0,
-            lonDis: 0.0003,
+            lonDis: 0.0005,
             colour: 0x00ff00
         }];
 
